@@ -1,22 +1,37 @@
-
+import { Routes,Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
-import { useState } from 'react';
+import Navbar from './components/navbar/Navbar'
+import News from './components/news/News';
 
 function App() {
-   const [newsList,setNewsList]=useState([]);
-   const fetchData=async ()=>{
-    let url="https://newsapi.org/v2/everything?q=tesla&from=2023-08-24&sortBy=publishedAt&apiKey=2e7cc35850954282a2c9761092639d1e"
-      let data=await fetch(url);
-      let parseData=await data.json();
-      setNewsList(parseData);
-      console.log("data",newsList);
-  }
-
+// business entertainment general health science sports technology
   return (
     <div className="App">
-        <button onClick={fetchData} >fetchData from service</button>
+      <Navbar/>
+        <Routes>
+          <Route exact path='/' element={<News category="general"/>} />
+        </Routes>
+        <Routes>
+          <Route exact path='/business' element={<News category="business"/>} />
+        </Routes>
+        <Routes>
+          <Route exact path='/entertainment' element={<News category="entertainment"/>} />
+        </Routes>
+        <Routes>
+          <Route exact path='/health' element={<News category="health"/>} />
+        </Routes>
+        <Routes>
+          <Route exact path='/science' element={<News category="science"/>} />
+        </Routes>
+        <Routes>
+          <Route exact path='/sports' element={<News category="sports"/>} />
+        </Routes>
+        <Routes>
+          <Route exact path='/technology' element={<News category="technology"/>} />
+        </Routes>
     </div>
   );
 }
+
 
 export default App;
